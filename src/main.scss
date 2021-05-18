@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+    url("../images/Noon.jpg");
+  background-size: cover;
+
+  color: white;
+  font-family: "montserrat";
+}
+
+.mainPanel {
+  display: flex;
+  width: 100%;
+  height: 60%;
+  font-weight: bold;
+
+  .tempDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+
+    
+
+    .tempIcon {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .nameDiv {
+        display: flex;
+        font-size: 50px;
+      margin-bottom: 20px;
+
+      #country {
+        font-size: 24px;
+        align-self: flex-end;
+        padding-left: 10px;
+      }
+    }
+
+    .mainTempDiv {
+      display: flex;
+      align-items: center;
+      font-size: 100px;
+      margin-top: 10px;
+
+      & > * {
+        padding: 25px;
+      }
+    }
+
+    .mainTemp {
+      font-size: 80px;
+      border-right: 2px solid white;
+    }
+  }
+}
+
+#desc {
+  font-size: 24px;
+}
+
+.inputDiv {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  height: 30px;
+  width: 250px;
+
+  input {
+    width: 85%;
+    height: 100%;
+    background-color: transparent !important;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white !important;
+    font-size: 20px;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+      border-color: rgb(136, 133, 133);
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: white !important;
+    }
+  }
+
+  .searchIcon {
+    font-size: 24px;
+  }
+}
+
+.infoPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 40%;
+  border: 1px solid white;
+
+  .weatherDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .timeDiv {
+      width: 125px;
+    }
+
+    .infoPanelTemp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: bold;
+      width: 50px;
+
+      .minmax {
+        padding-top: 2px;
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
+
+    .pop {
+      color: lightskyblue;
+      width: 50px;
+    }
+
+    #tempIcon {
+      font-size: 24px;
+    }
+  }
+}
+
+.optionDiv {
+    display:flex;
+    justify-content: space-between;
+
+    .timeOptionDiv{
+        display: flex;
+        padding-left: 20px;
+
+        div {
+            padding: 10px;
+            color: grey;
+        }
+    }
+
+}
+
+.activeOption{
+    color: white !important;
+}
+
+.active {
+  display: flex;
+}
