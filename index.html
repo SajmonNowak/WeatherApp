@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.min.css" />
+    <link rel="stylesheet" href="css/weather-icons.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div class="page" id="page">
+      <div class="mainPanel">
+        <div class="tempDiv">
+          <div class="nameDiv">
+            <div id="city" >BERLIN</div>
+            <div id="country">De</div>
+          </div>
+          <div id="tempDiv" class="mainTempDiv">
+            <div class="mainTemp">19°</div>
+            <div class="tempIcon">
+              <i id="mainTempIcon" class="wi wi-night-sleet"></i>
+            </div>
+          </div>
+          <div id="desc">Clear Sky</div>
+          <div class="inputDiv">
+            <input id="cityInput" type="text" />
+            <i id="searchIcon" class="fas fa-search searchIcon"></i>
+          </div>
+        </div>
+      </div>
+      <div class="optionDiv">
+        <div class="timeOptionDiv">
+          <div id="hourlyBtn" class="activeOption">Hourly</div>
+          <div id="weekBtn">Week</div>
+        </div>
+      </div>
+      <div class="infoPanel">
+        <!-- <div class="weatherDiv">
+          <div class="timeDiv">14:00</div>
+          <div class="infoPanelTemp">
+            <div>23°</div>
+            <div class="minmax">20/24</div>
+          </div>
+          <i id="tempIcon" class="wi wi-night-sleet"></i>
+          <div class="pop">74%</div>
+        </div>
+        <div class="weatherDiv">
+          <p>Tuesday</p>
+          <div>20°</div>
+          <i id="tempIcon" class="wi wi-night-sleet"></i>
+        </div>
+        <div class="weatherDiv">
+          <p>Wednesday</p>
+          <div>25°</div>
+          <i id="tempIcon" class="wi wi-night-sleet"></i>
+        </div>
+        <div class="weatherDiv">
+          <p>Thursday</p>
+          <div>20°</div>
+          <i id="tempIcon" class="wi wi-night-sleet"></i>
+        </div>
+        <div class="weatherDiv">
+          <p>Friday</p>
+          <div>17°</div>
+          <i id="tempIcon" class="wi wi-night-sleet"></i>
+        </div> -->
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
