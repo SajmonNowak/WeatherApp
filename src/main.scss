@@ -106,7 +106,8 @@
 }
 
 .infoPanel {
-  display: flex;
+  display: relative;
+  overflow: auto;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
@@ -117,9 +118,11 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    height: (100%/6);
 
     .timeDiv {
       width: 125px;
+      font-weight: bold;
     }
 
     .infoPanelTemp {
@@ -169,4 +172,8 @@
 
 .active {
   display: flex;
+}
+
+.darkerInfoDiv {
+  background-color: rgba(0, 0, 0, 0.5)
 }

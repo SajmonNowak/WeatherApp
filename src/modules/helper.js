@@ -1,9 +1,16 @@
 import { fromUnixTime, getHours } from "date-fns";
-import weatherIcons from "./weatherIcons";
+import iconsName from "./Icons";
 
 function convertToHour(unix) {
   const date = fromUnixTime(unix);
-  const hour = getHours(date);
+  let hour = getHours(date);
+
+  if (hour < 12) {
+    hour = hour + " am";
+  } else {
+    hour = hour + " pm";
+  }
+
   return hour;
 }
 
@@ -15,14 +22,9 @@ function convertToDay(unix) {
 
 function getIcon(data) {
   const prefix = "wi-";
-  const code = data.id;
-  let icon = weatherIcons[code].icon;
+  let iconName = data.id;
+  let icon = prefix + iconsName[iconName];
 
-  if (!(code > 699 && code < 800) && !(code > 899 && code < 1000)) {
-    icon = "day-" + icon;
-  }
-
-  icon = prefix + icon;
   return icon;
 }
 

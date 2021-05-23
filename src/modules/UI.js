@@ -13,12 +13,17 @@ export default class UI {
 
     tempDiv.addEventListener("click", UI.showSearchBar);
     cityDiv.addEventListener("click", UI.showSearchBar);
-    searchIcon.addEventListener("click", async () => {
-      let data = await APP.handleRequest();
-      UI.weatherData = data;
+    searchIcon.addEventListener("click", () => {
+      APP.handleRequest();
     });
-    hourlyBtn.addEventListener("click", UI.showHourlyData);
-    weekBtn.addEventListener("click", UI.showWeekData);
+    dayBtn.addEventListener("click", () => {
+      UI.fillHourlyData(UI.weatherData);
+      UI.activateBtn("hourly");
+    });
+    weekBtn.addEventListener("click", () => {
+      UI.fillDailyData(UI.weatherData);
+      UI.activateBtn("daily");
+    });
   }
 
   static showSearchBar() {
@@ -62,9 +67,24 @@ export default class UI {
     const infoPanel = document.querySelector(".infoPanel");
     infoPanel.innerHTML = "";
 
-    for (let i = 0; i < 5; i++) {
-      let weatherDiv = UI.createInfoPanelDiv(data.hourly[i]);
-      infoPanel.appendChild(weatherDiv);
+    for (let i = 0; i < 16; i++) {
+      let hourlyInfoDiv = UI.createInfoPanelDiv(data.hourly[i]);
+      if (i % 2 == 0) {
+        hourlyInfoDiv.classList.add("darkerInfoDiv");
+      }
+      infoPanel.appendChild(hourlyInfoDiv);
+    }
+  }
+
+  static fillDailyData(data) {
+    const infoPanel = document.querySelector(".infoPanel");
+    infoPanel.innerHTML = "";
+    for (let i = 0; i < 6; i++) {
+      let dailyInfoDiv = UI.createInfoPanelDiv(data.daily[i]);
+      if (i % 2 == 0) {
+        dailyInfoDiv.classList.add("darkerInfoDiv");
+      }
+      infoPanel.appendChild(dailyInfoDiv);
     }
   }
 
@@ -95,8 +115,17 @@ export default class UI {
     return weatherDiv;
   }
 
-  static showHourlyData() {
-    console.log(UI.weatherData);
+  static activateBtn(btn) {
+    const activeBtn = document.querySelector(".activeOption");
+    activeBtn.classList.remove("activeOption");
+
+    if (btn == "hourly") {
+      const dayBtn = document.getElementById("dayBtn");
+      dayBtn.classList.add("activeOption");
+    } else {
+      const weekBtn = document.getElementById("weekBtn");
+      weekBtn.classList.add("activeOption");
+    }
   }
 
   static changeIcon(iconDiv, data) {
