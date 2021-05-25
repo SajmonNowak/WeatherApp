@@ -84,6 +84,7 @@ export default class UI {
       if (i % 2 == 0) {
         dailyInfoDiv.classList.add("darkerInfoDiv");
       }
+      UI.fillMinMax(dailyInfoDiv, data.daily[i]);
       infoPanel.appendChild(dailyInfoDiv);
     }
   }
@@ -101,6 +102,7 @@ export default class UI {
     timeDiv.classList.add("timeDiv");
     infoPanelDiv.classList.add("infoPanelTemp");
     minmax.classList.add("minmax");
+    mainTemp.classList.add("temp");
     weatherIcon.id = "tempIcon";
     UI.changeIcon(weatherIcon, data);
     pop.classList.add("pop");
@@ -113,6 +115,12 @@ export default class UI {
     weatherDiv.append(timeDiv, infoPanelDiv, weatherIcon, pop);
 
     return weatherDiv;
+  }
+
+  static fillMinMax(div, data) {
+    const mDiv = div.querySelector(".minmax");
+
+    mDiv.textContent = data.min + " / " + data.max;
   }
 
   static activateBtn(btn) {

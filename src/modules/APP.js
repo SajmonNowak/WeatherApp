@@ -40,7 +40,7 @@ const APP = (() => {
 
   const fillWeatherInfo = async (weatherData) => {
     const data = await getWeatherInfo(weatherData, "metric");
-    
+
     fillCurrentInfo(weatherData.current, data.current);
     fillHourlyInfo(weatherData.hourly, data.hourly);
     fillDailyInfo(weatherData.daily, data.daily);
@@ -60,7 +60,7 @@ const APP = (() => {
       const info = {
         temp: Math.round(data[i].temp) + "°",
         desc: data[i].weather[0].description,
-        pop: data[i].pop,
+        pop: Math.round(data[i].pop * 100) + " %",
         time: convertToHour(data[i].dt),
         id: data[i].weather[0].id,
       };
@@ -71,12 +71,12 @@ const APP = (() => {
   const fillDailyInfo = (daily, data) => {
     for (let i = 1; i < 7; i++) {
       const info = {
-        temp: Math.round(data[i].temp.day),
+        temp: Math.round(data[i].temp.day) + "°",
         max: Math.round(data[i].temp.max),
         min: Math.round(data[i].temp.min),
         time: convertToDay(data[i].dt),
         desc: data[i].weather[0].description,
-        pop: data[i].pop,
+        pop: data[i].pop *100 + " %",
         id: data[i].weather[0].id,
       };
 
