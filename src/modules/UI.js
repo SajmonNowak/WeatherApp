@@ -62,8 +62,6 @@ export default class UI {
     description.textContent = data.current.desc;
 
     UI.changeIcon(tempIcon, data.current);
-    UI.changeBackground(data.current);
-    UI.displayRain(data.current);
   }
 
   static fillHourlyData(data) {
@@ -109,7 +107,6 @@ export default class UI {
     weatherIcon.id = "tempIcon";
     UI.changeIcon(weatherIcon, data);
     pop.classList.add("pop");
-
     timeDiv.textContent = data.time;
     mainTemp.textContent = data.temp;
     pop.textContent = data.pop;
@@ -148,8 +145,9 @@ export default class UI {
 
   static changeBackground(data) {
     const page = document.querySelector(".page");
-    page.style.backgroundImage = "none";
+    //page.style.backgroundImage = "none";
     page.style.backgroundImage = `url(imgs/${data.background})`;
+    page.style.backgroundSize = "cover";
   }
 
   static displayRain(data) {

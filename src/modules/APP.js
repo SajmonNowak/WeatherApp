@@ -16,8 +16,10 @@ const APP = (() => {
       UI.closeSearchBar();
     }
     const weatherData = await createWeatherObject(city);
-    await UI.fillMainData(weatherData);
-    await UI.fillHourlyData(weatherData);
+    UI.fillMainData(weatherData);
+    UI.fillHourlyData(weatherData);
+    UI.changeBackground(weatherData.current);
+    UI.displayRain(weatherData.current);
     UI.weatherData = weatherData;
   };
 

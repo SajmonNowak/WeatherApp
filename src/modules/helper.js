@@ -12,7 +12,6 @@ function convertToHour(unix, data) {
   let hour = getHours(zoneTime);
 
   hour = hour + ":00";
-
   return hour;
 }
 
