@@ -149,7 +149,7 @@ export default class UI {
   static changeBackground(data) {
     const page = document.querySelector(".page");
     page.style.backgroundImage = "none";
-    page.style.backgroundImage = `url(/dist/imgs/${data.background})`;
+    page.style.backgroundImage = `url(imgs/${data.background})`;
   }
 
   static displayRain(data) {
