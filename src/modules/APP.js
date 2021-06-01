@@ -2,7 +2,7 @@ import getWeatherInfo from "./WeatherAPI.js";
 import getCoordinates from "./GeocodingAPI.js";
 import WeatherData from "./WeatherData.js";
 import UI from "./UI";
-import { convertToHour, convertToDay } from "./helper.js";
+import { convertToHour, convertToDay, getTimeOfDay } from "./helper.js";
 
 const APP = (() => {
   const initialiseApp = () => {
@@ -16,8 +16,8 @@ const APP = (() => {
       UI.closeSearchBar();
     }
     const weatherData = await createWeatherObject(city);
-    UI.fillMainData(weatherData);
-    UI.fillHourlyData(weatherData);
+    await UI.fillMainData(weatherData);
+    await UI.fillHourlyData(weatherData);
     UI.weatherData = weatherData;
   };
 
@@ -41,28 +41,31 @@ const APP = (() => {
   const fillWeatherInfo = async (weatherData) => {
     const data = await getWeatherInfo(weatherData, "metric");
 
-    fillCurrentInfo(weatherData.current, data.current);
-    fillHourlyInfo(weatherData.hourly, data.hourly);
+    fillCurrentInfo(weatherData.current, data);
+    fillHourlyInfo(weatherData.hourly, data);
     fillDailyInfo(weatherData.daily, data.daily);
   };
 
   const fillCurrentInfo = (current, data) => {
-    current.temp = Math.round(data.temp) + "°";
-    current.desc = data.weather[0].description;
-    current.id = data.weather[0].id;
-    current.humidity = data.humidity;
-    current.feel = data.feels_like;
-    current.windspeed = data.wind_speed;
+    current.temp = Math.round(data.current.temp) + "°";
+    current.id = data.current.weather[0].id;
+    current.humidity = data.current.humidity;
+    current.feel = data.current.feels_like;
+    current.windspeed = data.current.wind_speed;
+    current.clouds = data.current.clouds;
+    current.rain = data.hourly[0].pop;
+    current.dayTime = getTimeOfDay(data.hourly[0].dt, data);
+    selectBackground(current);
   };
 
   const fillHourlyInfo = (hourly, data) => {
     for (let i = 1; i < 17; i++) {
       const info = {
-        temp: Math.round(data[i].temp) + "°",
-        desc: data[i].weather[0].description,
-        pop: Math.round(data[i].pop * 100) + " %",
-        time: convertToHour(data[i].dt),
-        id: data[i].weather[0].id,
+        temp: Math.round(data.hourly[i].temp) + "°",
+        desc: data.hourly[i].weather[0].description,
+        pop: Math.round(data.hourly[i].pop * 100) + " %",
+        time: convertToHour(data.hourly[i].dt, data),
+        id: data.hourly[i].weather[0].id,
       };
       hourly.push(info);
     }
@@ -76,11 +79,36 @@ const APP = (() => {
         min: Math.round(data[i].temp.min),
         time: convertToDay(data[i].dt),
         desc: data[i].weather[0].description,
-        pop: data[i].pop *100 + " %",
+        pop: Math.round(data[i].pop * 100) + " %",
         id: data[i].weather[0].id,
       };
 
       daily.push(info);
+    }
+  };
+
+  const selectBackground = (data) => {
+    if (data.dayTime == "day") {
+      switch (true) {
+        case 10 > data.clouds:
+          data.background = "Sunny.jpg";
+          break;
+        case 98.9 > data.clouds:
+          data.background = "Cloudy.jpg";
+          break;
+        case 98.9 < data.clouds:
+          data.background = "VeryCloudy.jpg";
+          break;
+      }
+    } else {
+      switch (true) {
+        case 19.99 > data.clouds:
+          data.background = "Night.jpg";
+          break;
+        case 19.99 < data.clouds:
+          data.background = "CloudyNight.jpg";
+          break;
+      }
     }
   };
 

@@ -8,7 +8,6 @@ async function getWeatherInfo(weatherData, mode) {
     `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${APIKey}&units=${mode}`
   );
   const data = await response.json();
-console.log(data);
   return data;
 }
 

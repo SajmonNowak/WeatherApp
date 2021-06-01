@@ -1,5 +1,6 @@
 import APP from "./APP.js";
 import { getIcon } from "./helper.js";
+import RainyDay from "./rainyday.js";
 
 export default class UI {
   weatherData = "";
@@ -61,6 +62,8 @@ export default class UI {
     description.textContent = data.current.desc;
 
     UI.changeIcon(tempIcon, data.current);
+    UI.changeBackground(data.current);
+    UI.displayRain(data.current);
   }
 
   static fillHourlyData(data) {
@@ -141,5 +144,19 @@ export default class UI {
 
     const className = getIcon(data).toString();
     iconDiv.classList.add("wi", className);
+  }
+
+  static changeBackground(data) {
+    const page = document.querySelector(".page");
+    page.style.backgroundImage = "none";
+    page.style.backgroundImage = `url(/dist/imgs/${data.background})`;
+  }
+
+  static displayRain(data) {
+    if (data.rain > 0.2) {
+      const page = document.querySelector(".page");
+      var rainyDay = new RainyDay({ image: page });
+      rainyDay.rain([[5, 2, 9]], 5);
+    }
   }
 }

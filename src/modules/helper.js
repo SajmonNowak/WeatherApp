@@ -1,17 +1,32 @@
 import { fromUnixTime, getHours } from "date-fns";
+import { zonedTimeToUtc, utcToZonedTime } from "date-fns-tz";
 import iconsName from "./Icons";
 
-function convertToHour(unix) {
+function convertToHour(unix, data) {
   const date = fromUnixTime(unix);
-  let hour = getHours(date);
+  const utcTime = zonedTimeToUtc(
+    date,
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  );
+  const zoneTime = utcToZonedTime(utcTime, data.timezone);
+  let hour = getHours(zoneTime);
 
-  if (hour < 12) {
-    hour = hour + " am";
-  } else {
-    hour = hour + " pm";
-  }
+  hour = hour + ":00";
 
   return hour;
+}
+
+function getTimeOfDay(unix, data) {
+  let hour = convertToHour(unix, data);
+  let array = hour.split("");
+  array.splice(array.length - 3, 3);
+  let fullHour = array.join("");
+
+  if (6 > fullHour || fullHour > 22) {
+    return "night";
+  } else {
+    return "day";
+  }
 }
 
 function convertToDay(unix) {
@@ -28,4 +43,4 @@ function getIcon(data) {
   return icon;
 }
 
-export { convertToHour, convertToDay, getIcon };
+export { convertToHour, convertToDay, getIcon, getTimeOfDay };

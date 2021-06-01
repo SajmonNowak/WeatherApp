@@ -6,12 +6,14 @@ export default class WeatherData {
     this.lat = "";
     this.current = {
       temp: "",
-      desc: "",
       humidity: "",
       feel: "",
       windspeed: "",
       rain: "",
       id: "",
+      clouds: "",
+      background: "",
+      dayTime: "",
     };
     this.hourly = [];
     this.daily = [];
