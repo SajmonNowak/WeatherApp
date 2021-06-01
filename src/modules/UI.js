@@ -11,9 +11,15 @@ export default class UI {
     const searchIcon = document.getElementById("searchIcon");
     const hourlyBtn = document.getElementById("hourlyBtn");
     const weekBtn = document.getElementById("weekBtn");
+    const modal = document.querySelector(".modal");
 
     tempDiv.addEventListener("click", UI.showSearchBar);
     cityDiv.addEventListener("click", UI.showSearchBar);
+    modal.addEventListener("click", (e) => {
+      if (!e.target.closest(".inputDiv")) {
+        UI.closeSearchBar();
+      }
+    });
     searchIcon.addEventListener("click", () => {
       APP.handleRequest();
     });
@@ -28,7 +34,7 @@ export default class UI {
   }
 
   static showSearchBar() {
-    const searchBar = document.querySelector(".inputDiv");
+    const searchBar = document.querySelector(".modal");
     if (searchBar.classList.contains("active")) {
       UI.closeSearchBar();
       return;
@@ -38,7 +44,7 @@ export default class UI {
   }
 
   static closeSearchBar() {
-    const searchBar = document.querySelector(".inputDiv");
+    const searchBar = document.querySelector(".modal");
 
     searchBar.classList.remove("active");
   }

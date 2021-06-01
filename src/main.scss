@@ -64,23 +64,38 @@
   font-size: 24px;
 }
 
-.inputDiv {
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
   display: none;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-  height: 30px;
-  width: 250px;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+
+  .inputDiv {
+    background-color: blue;
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   input {
-    width: 85%;
-    height: 100%;
+    width: 100%;
+    margin-right: 10px;
+    height: 50px;
     background-color: transparent !important;
     border: none;
     border-bottom: 2px solid white;
     color: white !important;
     font-size: 20px;
     text-align: center;
+    z-index: 1001;
 
     &:focus {
       outline: none;
@@ -116,6 +131,7 @@
     align-items: center;
     justify-content: space-evenly;
     height: (100%/6);
+    min-height: 40px;
 
     .timeDiv {
       width: 125px;
@@ -257,5 +273,12 @@
 
   .optionDiv {
     font-size: 24px;
+  }
+
+  .modal {
+    .inputDiv {
+      width: 400px;
+      margin-right: 25px;
+    }
   }
 }
